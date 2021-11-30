@@ -1,0 +1,9 @@
+.profile__add-button {
+  justify-self: end;
+}
+
+@media all and (max-width: 1023px) {
+  .profile__add-button {
+    margin: 36px auto 0;
+  }
+}

@@ -1,0 +1,4 @@
+.profile__edit-button {
+  grid-area: profile__edit-button;
+  align-self: center;
+}
