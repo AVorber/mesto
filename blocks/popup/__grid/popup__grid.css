@@ -1,0 +1,23 @@
+.popup__grid {
+  display: grid;
+  grid-template-areas:
+  ". . popup__close__button"
+  ". popup__container .";
+  grid-template-columns: 1fr minmax(min-content, 430px) 1fr;
+  gap: 8px;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media all and (max-width: 1023px) {
+  .popup__grid {
+    grid-template-areas:
+    "popup__close__button"
+    "popup__container";
+    grid-template-columns: minmax(min-content, 282px);
+    gap: 16px;
+    justify-items: end;
+  }
+}
