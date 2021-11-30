@@ -1,0 +1,14 @@
+.favorite-button {
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  border: none;
+  background: no-repeat center url("../../images/favorite.svg");
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.favorite-button:hover {
+  opacity: 0.5;
+}
