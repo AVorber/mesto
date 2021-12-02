@@ -1,4 +1,4 @@
-.save-button {
+.popup__save-button {
   margin: 46px auto 0;
   padding: 0;
   width: 358px;
@@ -16,12 +16,12 @@
   transition: opacity 0.3s ease-in;
 }
 
-.save-button:hover {
+.popup__save-button:hover {
   opacity: 0.8;
 }
 
 @media all and (max-width: 1023px) {
-  .save-button {
+  .popup__save-button {
     margin: 45px auto 0;
     width: 238px;
     height: 46px;
