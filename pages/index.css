@@ -17,7 +17,6 @@
 
 /*profile*/
 @import url(../blocks/profile/profile.css);
-@import url(../blocks/profile/__add-button/profile__add-button.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__info/profile__info.css);
@@ -27,6 +26,7 @@
 /*cards*/
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__add-button/card__add-button.css);
 @import url(../blocks/card/__favorite-button/card__favorite-button.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info/card__info.css);
