@@ -15,71 +15,99 @@ const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
   {
-    name: 'Камчатка',
-    link: './images/kamchatka.jpg'
-  },
-  {
-    name: 'Дивноморск',
-    link: './images/divnomorsk.jpg'
-  },
-  {
-    name: 'Кабардино-Балкария',
-    link: './images/kabardino-balkariya.jpg'
-  },
-  {
-    name: 'Никола-Ленивец',
-    link: './images/nikola-lenivetc.jpg'
+    name: 'Ольхон',
+    link: './images/olhon.jpg'
   },
   {
     name: 'Петергоф',
     link: './images/peterhof.jpg'
   },
   {
-    name: 'Ольхон',
-    link: './images/olhon.jpg'
-  }
+    name: 'Никола-Ленивец',
+    link: './images/nikola-lenivetc.jpg'
+  },
+  {
+    name: 'Кабардино-Балкария',
+    link: './images/kabardino-balkariya.jpg'
+  },
+  {
+    name: 'Дивноморск',
+    link: './images/divnomorsk.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: './images/kamchatka.jpg'
+  },
 ];
 
-initialCards.forEach(element => {
-  const card = cardTemplate.cloneNode(true);
-
-  card.querySelector('.card__title').textContent = element.name;
-  card.querySelector('.card__image').alt = element.name;
-  card.querySelector('.card__image').src = element.link;
-
-  cards.append(card);
-});
-
-function openEditProfilePopup () {
-  openPopup(editProfilePopup);
-  profileNameInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileSubtitle.textContent;
-  closePopup(editProfilePopup);
-}
-
-function openAddCardPopup () {
-  openPopup(addCardPopup);
-  closePopup(addCardPopup);
-}
-
-function formSubmitHandler (evt) {
-  evt.preventDefault();
-  profileTitle.textContent = profileNameInput.value;
-  profileSubtitle.textContent = profileDescriptionInput.value;
-  editProfilePopup.classList.remove('popup_opened');
-}
+initialCards.forEach(
+  element => addCard(nameValue=element.name, imageLinkValue=element.link)
+);
 
 function openPopup (popup) {
   popup.classList.add('popup_opened');
 }
 
 function closePopup (popup) {
+  popup.classList.remove('popup_opened');
+}
+
+function clickClosePopupButton(popup) {
   popup.querySelector('.popup__close-button').addEventListener(
-    'click', () => popup.classList.remove('popup_opened')
+    'click', () => closePopup(popup)
   );
 }
 
-editProfileButton.addEventListener('click', openEditProfilePopup);
-editProfilePopup.addEventListener('submit', formSubmitHandler);
+function openEditProfilePopup () {
+  openPopup(editProfilePopup);
 
+  profileNameInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileSubtitle.textContent;
+  editProfilePopup.addEventListener('submit', profileFormSubmitHandler);
+
+  clickClosePopupButton(editProfilePopup);
+}
+
+function profileFormSubmitHandler (evt) {
+  evt.preventDefault();
+
+  profileTitle.textContent = profileNameInput.value;
+  profileSubtitle.textContent = profileDescriptionInput.value;
+
+  closePopup(editProfilePopup);
+}
+
+function openAddCardPopup () {
+  openPopup(addCardPopup);
+
+  addCardPopup.addEventListener('submit', cardFormSubmitHandler);
+
+  clickClosePopupButton(addCardPopup);
+}
+
+function addCard(nameValue, imageLinkValue) {
+  const card = cardTemplate.cloneNode(true);
+
+  card.querySelector('.card__title').textContent = nameValue;
+  card.querySelector('.card__image').alt = nameValue;
+  card.querySelector('.card__image').src = imageLinkValue;
+
+  cards.prepend(card);
+}
+
+function cardFormSubmitHandler(evt) {
+  evt.preventDefault();
+
+  const cardName = cardNameInput.value;
+  const cardImageLink = cardImageLinkInput.value;
+  if (cardName && cardImageLink) {
+    addCard(nameValue=cardName, imageLinkValue=cardImageLink);
+    cardNameInput.value = '';
+    cardImageLinkInput.value = '';
+  }
+
+  closePopup(addCardPopup);
+}
+
+editProfileButton.addEventListener('click', openEditProfilePopup);
 addCardButton.addEventListener('click', openAddCardPopup);
