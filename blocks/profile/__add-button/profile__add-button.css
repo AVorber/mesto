@@ -1,4 +1,4 @@
-.card__add-button {
+.profile__add-button {
   padding: 0;
   width: 150px;
   height: 50px;
@@ -11,19 +11,19 @@
   transition: opacity 0.3s ease-in;
 }
 
-.card__add-button:hover {
+.profile__add-button:hover {
   opacity: 0.5;
 }
 
 @media all and (max-width: 992px) {
-  .card__add-button {
+  .profile__add-button {
     width: 335px;
     margin: 38px auto 0;
   }
 }
 
 @media all and (max-width: 767px) {
-  .card__add-button {
+  .profile__add-button {
     width: 100%;
   }
 }

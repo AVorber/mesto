@@ -6,7 +6,7 @@ const editProfilePopup = document.querySelector('.popup_type_profile');
 const profileNameInput = editProfilePopup.querySelector('.popup__name-input');
 const profileDescriptionInput = editProfilePopup.querySelector('.popup__description-input');
 
-const addCardButton = document.querySelector('.card__add-button');
+const addCardButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_type_card');
 const cardNameInput = addCardPopup.querySelector('.popup__card-name-input');
 const cardImageLinkInput = addCardPopup.querySelector('.popup__image-link-input');
