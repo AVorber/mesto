@@ -17,33 +17,33 @@ const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
   {
-    name: 'Ольхон',
-    link: './images/olhon.jpg'
+    name: 'Камчатка',
+    link: './images/kamchatka.jpg'
   },
-  {
-    name: 'Петергоф',
-    link: './images/peterhof.jpg'
-  },
-  {
-    name: 'Никола-Ленивец',
-    link: './images/nikola-lenivetc.jpg'
+    {
+    name: 'Дивноморск',
+    link: './images/divnomorsk.jpg'
   },
   {
     name: 'Кабардино-Балкария',
     link: './images/kabardino-balkariya.jpg'
   },
   {
-    name: 'Дивноморск',
-    link: './images/divnomorsk.jpg'
+    name: 'Никола-Ленивец',
+    link: './images/nikola-lenivetc.jpg'
   },
   {
-    name: 'Камчатка',
-    link: './images/kamchatka.jpg'
+    name: 'Петергоф',
+    link: './images/peterhof.jpg'
+  },
+  {
+    name: 'Ольхон',
+    link: './images/olhon.jpg'
   },
 ];
 
 initialCards.forEach(
-  element => addCard(nameValue=element.name, imageLinkValue=element.link)
+  element => cards.append(addCard(nameValue = element.name, imageLinkValue = element.link))
 );
 
 function openPopup (popup) {
@@ -118,7 +118,7 @@ function addCard(nameValue, imageLinkValue) {
     evt.target.classList.toggle('card__favorite-button_active')
   );
 
-  cards.prepend(card);
+  return card
 }
 
 function cardFormSubmitHandler(evt) {
@@ -127,7 +127,8 @@ function cardFormSubmitHandler(evt) {
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
   if (cardName && cardImageLink) {
-    addCard(nameValue=cardName, imageLinkValue=cardImageLink);
+    const card = addCard(nameValue = cardName, imageLinkValue = cardImageLink);
+    cards.prepend(card);
     cardNameInput.value = '';
     cardImageLinkInput.value = '';
   }
