@@ -92,6 +92,10 @@ function addCard(nameValue, imageLinkValue) {
   card.querySelector('.card__image').alt = nameValue;
   card.querySelector('.card__image').src = imageLinkValue;
 
+  card.querySelector('.card__favorite-button').addEventListener('click', evt => {
+    evt.target.classList.toggle('card__favorite-button_active');
+  });
+
   cards.prepend(card);
 }
 
