@@ -15,9 +15,15 @@
   opacity: 0.5;
 }
 
-@media all and (max-width: 1023px) {
+@media all and (max-width: 992px) {
+  .card__add-button {
+    width: 335px;
+    margin: 38px auto 0;
+  }
+}
+
+@media all and (max-width: 767px) {
   .card__add-button {
     width: 100%;
-    margin: 38px auto 0;
   }
 }
