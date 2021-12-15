@@ -11,6 +11,8 @@ const addCardPopup = document.querySelector('.popup_type_card');
 const cardNameInput = addCardPopup.querySelector('.popup__card-name-input');
 const cardImageLinkInput = addCardPopup.querySelector('.popup__image-link-input');
 
+const imagePopup = document.querySelector('.popup_type_image');
+
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
@@ -77,28 +79,44 @@ function profileFormSubmitHandler (evt) {
   closePopup(editProfilePopup);
 }
 
+function openImagePopup (image, imageTitle) {
+  const popupImage = imagePopup.querySelector('.popup__image');
+  const popupImageTitle = imagePopup.querySelector('.popup__image-title');
+
+  popupImageTitle.textContent = imageTitle;
+  popupImage.alt = imageTitle;
+  popupImage.src = image;
+
+  openPopup(imagePopup);
+  clickClosePopupButton(imagePopup);
+}
+
 function openAddCardPopup () {
   openPopup(addCardPopup);
-
   addCardPopup.addEventListener('submit', cardFormSubmitHandler);
-
   clickClosePopupButton(addCardPopup);
 }
 
 function addCard(nameValue, imageLinkValue) {
   const card = cardTemplate.cloneNode(true);
+  const cardTitle = card.querySelector('.card__title');
+  const cardImage = card.querySelector('.card__image');
+  const cardDeleteButton = card.querySelector('.card__delete-button');
+  const cardFavoriteButton = card.querySelector('.card__favorite-button');
 
-  card.querySelector('.card__title').textContent = nameValue;
-  card.querySelector('.card__image').alt = nameValue;
-  card.querySelector('.card__image').src = imageLinkValue;
+  cardTitle.textContent = nameValue;
+  cardImage.alt = nameValue;
+  cardImage.src = imageLinkValue;
 
-  card.querySelector('.card__delete-button').addEventListener('click', evt => {
-    evt.target.closest('.card').remove();
+  cardImage.addEventListener('click', evt => {
+    openImagePopup(image = imageLinkValue, imageTitle = nameValue)
   });
 
-  card.querySelector('.card__favorite-button').addEventListener('click', evt => {
-    evt.target.classList.toggle('card__favorite-button_active');
-  });
+  cardDeleteButton.addEventListener('click', evt => evt.target.closest('.card').remove());
+
+  cardFavoriteButton.addEventListener('click', evt =>
+    evt.target.classList.toggle('card__favorite-button_active')
+  );
 
   cards.prepend(card);
 }
