@@ -52,20 +52,28 @@ initialCards.forEach(
   element => cards.append(addCard(nameValue = element.name, imageLinkValue = element.link))
 );
 
-function handleKey(evt) {
+function handleKeydown(evt) {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   }
 }
 
+function handleMousedown(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleKey);
+  popup.addEventListener('mousedown', handleMousedown);
+  document.addEventListener('keydown', handleKeydown);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleKey);
+  popup.removeEventListener('mousedown', handleMousedown);
+  document.removeEventListener('keydown', handleKeydown);
 }
 
 function openEditProfilePopup() {
