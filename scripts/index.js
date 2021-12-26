@@ -3,13 +3,15 @@ const profileSubtitle = document.querySelector('.profile__subtitle');
 
 const editProfileButton = document.querySelector('.profile__edit-button');
 const editProfilePopup = document.querySelector('.popup_type_profile');
-const profileNameInput = editProfilePopup.querySelector('.popup__name-input');
-const profileDescriptionInput = editProfilePopup.querySelector('.popup__description-input');
+const editProfileForm = document.forms.editProfile;
+const profileNameInput = editProfileForm.name;
+const profileDescriptionInput = editProfileForm.description;
 
 const addCardButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_type_card');
-const cardNameInput = addCardPopup.querySelector('.popup__card-name-input');
-const cardImageLinkInput = addCardPopup.querySelector('.popup__image-link-input');
+const addCardForm = document.forms.addCard;
+const cardNameInput = addCardForm.name;
+const cardImageLinkInput = addCardForm.imageLink;
 
 const imagePopup = document.querySelector('.popup_type_image');
 const popupImage = imagePopup.querySelector('.popup__image');
@@ -90,8 +92,6 @@ function addCard(nameValue, imageLinkValue) {
   const card = cardTemplate.cloneNode(true);
   const cardTitle = card.querySelector('.card__title');
   const cardImage = card.querySelector('.card__image');
-  const cardDeleteButton = card.querySelector('.card__delete-button');
-  const cardFavoriteButton = card.querySelector('.card__favorite-button');
 
   cardTitle.textContent = nameValue;
   cardImage.alt = nameValue;
@@ -100,12 +100,6 @@ function addCard(nameValue, imageLinkValue) {
   cardImage.addEventListener('click', evt => {
     openImagePopup(image = imageLinkValue, imageTitle = nameValue)
   });
-
-  cardDeleteButton.addEventListener('click', evt => evt.target.closest('.card').remove());
-
-  cardFavoriteButton.addEventListener('click', evt =>
-    evt.target.classList.toggle('card__favorite-button_active')
-  );
 
   return card
 }
@@ -118,20 +112,31 @@ function addCardFormSubmit(evt) {
   if (cardName && cardImageLink) {
     const card = addCard(nameValue = cardName, imageLinkValue = cardImageLink);
     cards.prepend(card);
-    cardNameInput.value = '';
-    cardImageLinkInput.value = '';
+    addCardForm.reset();
   }
 
   closePopup(addCardPopup);
 }
 
 editProfileButton.addEventListener('click', openEditProfilePopup);
-editProfilePopup.addEventListener('submit', editProfileFormSubmit);
+editProfileForm.addEventListener('submit', editProfileFormSubmit);
 
 addCardButton.addEventListener('click', openAddCardPopup);
-addCardPopup.addEventListener('submit', addCardFormSubmit);
+addCardForm.addEventListener('submit', addCardFormSubmit);
 
 closeButtons.forEach(element => {
   const popup = element.closest('.popup');
   element.addEventListener('click', () => closePopup(popup));
+});
+
+cards.addEventListener('click', evt => {
+  if (evt.target.classList.contains('card__favorite-button')) {
+    evt.target.classList.toggle('card__favorite-button_active');
+  }
+});
+
+cards.addEventListener('click', evt => {
+  if (evt.target.classList.contains('card__delete-button')) {
+    evt.target.closest('.card').remove();
+  }
 });
