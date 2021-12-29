@@ -52,6 +52,12 @@ initialCards.forEach(
   element => cards.append(addCard(nameValue = element.name, imageLinkValue = element.link))
 );
 
+const initialProfile = (name, description) => {
+  profileNameInput.value = name;
+  profileDescriptionInput.value = description;
+};
+initialProfile(profileTitle.textContent, profileSubtitle.textContent);
+
 function handleKeydown(evt) {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
@@ -76,13 +82,6 @@ function closePopup(popup) {
   document.removeEventListener('keydown', handleKeydown);
 }
 
-function openEditProfilePopup() {
-  openPopup(editProfilePopup);
-
-  profileNameInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileSubtitle.textContent;
-}
-
 function editProfileFormSubmit(evt) {
   evt.preventDefault();
 
@@ -98,10 +97,6 @@ function openImagePopup(image, imageTitle) {
   popupImage.src = image;
 
   openPopup(imagePopup);
-}
-
-function openAddCardPopup() {
-  openPopup(addCardPopup);
 }
 
 function addCard(nameValue, imageLinkValue) {
@@ -134,10 +129,10 @@ function addCardFormSubmit(evt) {
   closePopup(addCardPopup);
 }
 
-editProfileButton.addEventListener('click', openEditProfilePopup);
+editProfileButton.addEventListener('click', () => openPopup(editProfilePopup));
 editProfileForm.addEventListener('submit', editProfileFormSubmit);
 
-addCardButton.addEventListener('click', openAddCardPopup);
+addCardButton.addEventListener('click', () => openPopup(addCardPopup));
 addCardForm.addEventListener('submit', addCardFormSubmit);
 
 closeButtons.forEach(element => {
