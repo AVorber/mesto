@@ -103,6 +103,8 @@ function addCard(nameValue, imageLinkValue) {
   const card = cardTemplate.cloneNode(true);
   const cardTitle = card.querySelector('.card__title');
   const cardImage = card.querySelector('.card__image');
+  const cardDeleteButton = card.querySelector('.card__delete-button');
+  const cardFavoriteButton = card.querySelector('.card__favorite-button');
 
   cardTitle.textContent = nameValue;
   cardImage.alt = nameValue;
@@ -111,6 +113,12 @@ function addCard(nameValue, imageLinkValue) {
   cardImage.addEventListener('click', evt => {
     openImagePopup(imageLinkValue, nameValue)
   });
+
+  cardDeleteButton.addEventListener('click', evt => evt.target.closest('.card').remove());
+
+  cardFavoriteButton.addEventListener('click', evt =>
+    evt.target.classList.toggle('card__favorite-button_active')
+  );
 
   return card
 }
@@ -138,16 +146,4 @@ addCardForm.addEventListener('submit', addCardFormSubmit);
 closeButtons.forEach(element => {
   const popup = element.closest('.popup');
   element.addEventListener('click', () => closePopup(popup));
-});
-
-cards.addEventListener('click', evt => {
-  if (evt.target.classList.contains('card__favorite-button')) {
-    evt.target.classList.toggle('card__favorite-button_active');
-  }
-});
-
-cards.addEventListener('click', evt => {
-  if (evt.target.classList.contains('card__delete-button')) {
-    evt.target.closest('.card').remove();
-  }
 });
