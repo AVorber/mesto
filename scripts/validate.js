@@ -31,11 +31,6 @@ const setEventListeners = (formElement, {...selectors}) => {
       checkInputValidity(formElement, inputElement, selectors.inputErrorClass, selectors.errorClass);
       toggleButtonState(inputList, buttonElement, selectors.inactiveButtonClass);
     });
-    inputElement.addEventListener('keydown', evt => {
-      if (evt.key === 'Enter' && hasInvalidInput(inputList)) {
-        evt.preventDefault();
-      }
-    });
   });
 };
 

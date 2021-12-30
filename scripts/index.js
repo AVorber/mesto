@@ -72,13 +72,11 @@ function handleMousedown(evt) {
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.addEventListener('mousedown', handleMousedown);
   document.addEventListener('keydown', handleKeydown);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('mousedown', handleMousedown);
   document.removeEventListener('keydown', handleKeydown);
 }
 
@@ -150,3 +148,7 @@ closeButtons.forEach(element => {
   const popup = element.closest('.popup');
   element.addEventListener('click', () => closePopup(popup));
 });
+
+editProfilePopup.addEventListener('click', handleMousedown);
+addCardPopup.addEventListener('click', handleMousedown);
+imagePopup.addEventListener('click', handleMousedown);
