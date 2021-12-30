@@ -128,11 +128,14 @@ function addCardFormSubmit(evt) {
 
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
-  if (cardName && cardImageLink) {
-    const card = addCard(cardName, cardImageLink);
-    cards.prepend(card);
-    addCardForm.reset();
-  }
+  const card = addCard(cardName, cardImageLink);
+  const inputList = Array.from(addCardForm.querySelectorAll('.popup__field'));
+  const buttonElement = addCardForm.querySelector('.popup__save-button');
+  const inactiveButtonClass = 'popup__save-button_inactive';
+
+  cards.prepend(card);
+  addCardForm.reset();
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
 
   closePopup(addCardPopup);
 }
