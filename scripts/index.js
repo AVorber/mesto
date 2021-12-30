@@ -49,7 +49,7 @@ const initialCards = [
 ];
 
 initialCards.forEach(
-  element => cards.append(addCard(nameValue = element.name, imageLinkValue = element.link))
+  element => cards.append(addCard(element.name, element.link))
 );
 
 const initialProfile = (name, description) => {
@@ -109,7 +109,7 @@ function addCard(nameValue, imageLinkValue) {
   cardImage.src = imageLinkValue;
 
   cardImage.addEventListener('click', evt => {
-    openImagePopup(image = imageLinkValue, imageTitle = nameValue)
+    openImagePopup(imageLinkValue, nameValue)
   });
 
   return card
@@ -121,7 +121,7 @@ function addCardFormSubmit(evt) {
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
   if (cardName && cardImageLink) {
-    const card = addCard(nameValue = cardName, imageLinkValue = cardImageLink);
+    const card = addCard(cardName, cardImageLink);
     cards.prepend(card);
     addCardForm.reset();
   }
