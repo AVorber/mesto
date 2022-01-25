@@ -57,7 +57,6 @@ export class FormValidator {
   };
 
   enableValidation() {
-    const fieldsetList = Array.from(this._formElement.querySelectorAll(this._selectorConfig.formFieldsetSelector));
-    fieldsetList.forEach(fieldSet => this._setEventListeners());
+    this._setEventListeners();
   }
 }
