@@ -127,19 +127,3 @@ closeButtons.forEach(element => {
 editProfilePopup.addEventListener('click', handleMousedown);
 addCardPopup.addEventListener('click', handleMousedown);
 imagePopup.addEventListener('click', handleMousedown);
-
-
-/** Обработка событий нажатия на кнопки лайк и удалить карточку при помощи всплытия и делегирования,
- * как альтернатива обработки этих же событий в классе Card для каждой карточки.
-*/
-cards.addEventListener('click', evt => {
-  if (evt.target.classList.contains('card__favorite-button')) {
-    evt.target.classList.toggle('card__favorite-button_active');
-  }
-});
-
-cards.addEventListener('click', evt => {
-  if (evt.target.classList.contains('card__delete-button')) {
-    evt.target.closest('.card').remove();
-  }
-});

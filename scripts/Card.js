@@ -17,7 +17,15 @@ export class Card {
     return cardElement;
   }
 
-  _openImageListener() {
+  _setEventListeners() {
+    this._element
+      .querySelector('.card__delete-button')
+      .addEventListener('click', evt => evt.target.closest('.card').remove());
+    this._element
+      .querySelector('.card__favorite-button')
+      .addEventListener('click', evt =>
+        evt.target.classList.toggle('card__favorite-button_active')
+      );
     this._element
       .querySelector('.card__image')
       .addEventListener('click', evt => openImagePopup(this._name, this._link));
@@ -25,7 +33,7 @@ export class Card {
 
   addCard() {
     this._element = this._getTemplate();
-    this._openImageListener();
+    this._setEventListeners();
 
     this._element.querySelector('.card__title').textContent = this._name;
     this._element.querySelector('.card__image').alt = this._name;
