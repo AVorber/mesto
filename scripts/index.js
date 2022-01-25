@@ -1,4 +1,19 @@
 import { Card } from './Card.js';
+import { initialCards } from './data.js';
+import { FormValidator } from './FormValidator.js';
+
+export { selectorConfig, openImagePopup };
+
+
+const selectorConfig = {
+  cardTemplate: '.card-template',
+  formFieldsetSelector: '.popup__input-container',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__field-error_active'
+};
 
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -21,37 +36,13 @@ const popupImageTitle = imagePopup.querySelector('.popup__image-title');
 
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
-const cardTemplate = '.card-template';
 const cards = document.querySelector('.cards');
-const initialCards = [
-  {
-    name: 'Камчатка',
-    link: './images/kamchatka.jpg'
-  },
-    {
-    name: 'Дивноморск',
-    link: './images/divnomorsk.jpg'
-  },
-  {
-    name: 'Кабардино-Балкария',
-    link: './images/kabardino-balkariya.jpg'
-  },
-  {
-    name: 'Никола-Ленивец',
-    link: './images/nikola-lenivetc.jpg'
-  },
-  {
-    name: 'Петергоф',
-    link: './images/peterhof.jpg'
-  },
-  {
-    name: 'Ольхон',
-    link: './images/olhon.jpg'
-  },
-];
 
+
+/** Инициализация блока карточек и профиля.
+*/
 initialCards.forEach(
-  element => cards.append(new Card(cardTemplate, element.name, element.link).addCard())
+  element => cards.append(new Card(selectorConfig.cardTemplate, element.name, element.link).addCard())
 );
 
 const initialProfile = (name, description) => {
@@ -59,6 +50,13 @@ const initialProfile = (name, description) => {
   profileDescriptionInput.value = description;
 };
 initialProfile(profileTitle.textContent, profileSubtitle.textContent);
+
+
+/** Включение валидации форм.
+*/
+new FormValidator(selectorConfig, editProfileForm).enableValidation();
+new FormValidator(selectorConfig, addCardForm).enableValidation();
+
 
 function handleKeydown(evt) {
   if (evt.key === 'Escape') {
@@ -91,7 +89,7 @@ function editProfileFormSubmit(evt) {
   closePopup(editProfilePopup);
 }
 
-export function openImagePopup(name, link) {
+function openImagePopup(name, link) {
   popupImageTitle.textContent = name;
   popupImage.alt = link;
   popupImage.src = link;
@@ -104,14 +102,13 @@ function addCardFormSubmit(evt) {
 
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
-  const card = new Card(cardTemplate, cardName, cardImageLink).addCard();
-  const inputList = Array.from(addCardForm.querySelectorAll('.popup__field'));
+  const card = new Card(selectorConfig.cardTemplate, cardName, cardImageLink).addCard();
   const buttonElement = addCardForm.querySelector('.popup__save-button');
-  const inactiveButtonClass = 'popup__save-button_inactive';
 
   cards.prepend(card);
   addCardForm.reset();
-  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
+  buttonElement.classList.add('popup__save-button_inactive');
+  buttonElement.disabled = true;
 
   closePopup(addCardPopup);
 }
