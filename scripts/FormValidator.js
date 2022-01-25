@@ -4,19 +4,19 @@ export class FormValidator {
     this._formElement = formElement;
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some(inputElement => {
       return !inputElement.validity.valid;
     });
   };
 
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      buttonElement.classList.add(this._selectorConfig.inactiveButtonClass);
-      buttonElement.disabled = true;
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._submitButton.classList.add(this._selectorConfig.inactiveButtonClass);
+      this._submitButton.disabled = true;
     } else {
-      buttonElement.classList.remove(this._selectorConfig.inactiveButtonClass);
-      buttonElement.disabled = false;
+      this._submitButton.classList.remove(this._selectorConfig.inactiveButtonClass);
+      this._submitButton.disabled = false;
     }
   };
 
@@ -43,20 +43,26 @@ export class FormValidator {
   };
 
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._selectorConfig.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._selectorConfig.submitButtonSelector);
+    this._toggleButtonState();
 
-    this._toggleButtonState(inputList, buttonElement);
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState();
       });
     });
   };
 
+  resetValidation() {
+    this._formElement.reset();
+    this._toggleButtonState();
+    this._inputList.forEach(inputElement => this._hideInputError(inputElement));
+  }
+
   enableValidation() {
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._selectorConfig.inputSelector));
+    this._submitButton = this._formElement.querySelector(this._selectorConfig.submitButtonSelector);
+
     this._setEventListeners();
   }
 }

@@ -109,12 +109,8 @@ function addCardFormSubmit(evt) {
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
   const card = createCard(cardName, cardImageLink);
-  const buttonElement = addCardForm.querySelector('.popup__save-button');
 
   cards.prepend(card);
-  addCardForm.reset();
-  buttonElement.classList.add('popup__save-button_inactive');
-  buttonElement.disabled = true;
 
   closePopup(addCardPopup);
 }
@@ -122,7 +118,10 @@ function addCardFormSubmit(evt) {
 editProfileButton.addEventListener('click', () => openPopup(editProfilePopup));
 editProfileForm.addEventListener('submit', editProfileFormSubmit);
 
-addCardButton.addEventListener('click', () => openPopup(addCardPopup));
+addCardButton.addEventListener('click', () => {
+  openPopup(addCardPopup);
+  addCardFormValidator.resetValidation();
+});
 addCardForm.addEventListener('submit', addCardFormSubmit);
 
 closeButtons.forEach(element => {
