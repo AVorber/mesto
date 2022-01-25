@@ -48,7 +48,7 @@ addCardFormValidator.enableValidation();
 /** Инициализация блока карточек и профиля.
 */
 initialCards.forEach(
-  element => cards.append(new Card(selectorConfig.cardTemplate, element.name, element.link).addCard())
+  element => cards.append(createCard(element.name, element.link))
 );
 
 const initialProfile = (name, description) => {
@@ -97,12 +97,18 @@ function openImagePopup(name, link) {
   openPopup(imagePopup);
 }
 
+function createCard(name, link) {
+  const card = new Card(selectorConfig.cardTemplate, name, link);
+  const cardElement = card.getCard();
+  return cardElement;
+}
+
 function addCardFormSubmit(evt) {
   evt.preventDefault();
 
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
-  const card = new Card(selectorConfig.cardTemplate, cardName, cardImageLink).addCard();
+  const card = createCard(cardName, cardImageLink);
   const buttonElement = addCardForm.querySelector('.popup__save-button');
 
   cards.prepend(card);

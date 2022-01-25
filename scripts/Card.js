@@ -31,7 +31,7 @@ export class Card {
       .addEventListener('click', evt => openImagePopup(this._name, this._link));
   }
 
-  addCard() {
+  getCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
 
