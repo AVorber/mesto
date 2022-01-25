@@ -21,6 +21,7 @@ const popupImageTitle = imagePopup.querySelector('.popup__image-title');
 
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
+const cardTemplate = '.card-template';
 const cards = document.querySelector('.cards');
 const initialCards = [
   {
@@ -50,7 +51,7 @@ const initialCards = [
 ];
 
 initialCards.forEach(
-  element => cards.append(addCard(element.name, element.link))
+  element => cards.append(new Card(cardTemplate, element.name, element.link).addCard())
 );
 
 const initialProfile = (name, description) => {
@@ -90,36 +91,12 @@ function editProfileFormSubmit(evt) {
   closePopup(editProfilePopup);
 }
 
-function openImagePopup(image, imageTitle) {
-  popupImageTitle.textContent = imageTitle;
-  popupImage.alt = imageTitle;
-  popupImage.src = image;
+export function openImagePopup(name, link) {
+  popupImageTitle.textContent = name;
+  popupImage.alt = link;
+  popupImage.src = link;
 
   openPopup(imagePopup);
-}
-
-function addCard(nameValue, imageLinkValue) {
-  const card = new Card('.card-template').getTemplate();
-  const cardTitle = card.querySelector('.card__title');
-  const cardImage = card.querySelector('.card__image');
-  const cardDeleteButton = card.querySelector('.card__delete-button');
-  const cardFavoriteButton = card.querySelector('.card__favorite-button');
-
-  cardTitle.textContent = nameValue;
-  cardImage.alt = nameValue;
-  cardImage.src = imageLinkValue;
-
-  cardImage.addEventListener('click', evt => {
-    openImagePopup(imageLinkValue, nameValue)
-  });
-
-  cardDeleteButton.addEventListener('click', evt => evt.target.closest('.card').remove());
-
-  cardFavoriteButton.addEventListener('click', evt =>
-    evt.target.classList.toggle('card__favorite-button_active')
-  );
-
-  return card
 }
 
 function addCardFormSubmit(evt) {
@@ -127,7 +104,7 @@ function addCardFormSubmit(evt) {
 
   const cardName = cardNameInput.value;
   const cardImageLink = cardImageLinkInput.value;
-  const card = addCard(cardName, cardImageLink);
+  const card = new Card(cardTemplate, cardName, cardImageLink).addCard();
   const inputList = Array.from(addCardForm.querySelectorAll('.popup__field'));
   const buttonElement = addCardForm.querySelector('.popup__save-button');
   const inactiveButtonClass = 'popup__save-button_inactive';
@@ -153,3 +130,19 @@ closeButtons.forEach(element => {
 editProfilePopup.addEventListener('click', handleMousedown);
 addCardPopup.addEventListener('click', handleMousedown);
 imagePopup.addEventListener('click', handleMousedown);
+
+
+/** Обработка событий нажатия на кнопки лайк и удалить карточку при помощи всплытия и делегирования,
+ * как альтернатива обработки этих же событий в классе Card для каждой карточки.
+*/
+cards.addEventListener('click', evt => {
+  if (evt.target.classList.contains('card__favorite-button')) {
+    evt.target.classList.toggle('card__favorite-button_active');
+  }
+});
+
+cards.addEventListener('click', evt => {
+  if (evt.target.classList.contains('card__delete-button')) {
+    evt.target.closest('.card').remove();
+  }
+});
