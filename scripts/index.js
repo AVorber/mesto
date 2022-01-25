@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
@@ -20,7 +22,6 @@ const popupImageTitle = imagePopup.querySelector('.popup__image-title');
 const closeButtons = document.querySelectorAll('.popup__close-button');
 
 const cards = document.querySelector('.cards');
-const cardTemplate = document.querySelector('.card-template').content;
 const initialCards = [
   {
     name: 'Камчатка',
@@ -98,7 +99,7 @@ function openImagePopup(image, imageTitle) {
 }
 
 function addCard(nameValue, imageLinkValue) {
-  const card = cardTemplate.cloneNode(true);
+  const card = new Card('.card-template').getTemplate();
   const cardTitle = card.querySelector('.card__title');
   const cardImage = card.querySelector('.card__image');
   const cardDeleteButton = card.querySelector('.card__delete-button');
