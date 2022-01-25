@@ -38,6 +38,12 @@ const closeButtons = document.querySelectorAll('.popup__close-button');
 
 const cards = document.querySelector('.cards');
 
+const editProfileFormValidator = new FormValidator(selectorConfig, editProfileForm);
+editProfileFormValidator.enableValidation();
+
+const addCardFormValidator = new FormValidator(selectorConfig, addCardForm);
+addCardFormValidator.enableValidation();
+
 
 /** Инициализация блока карточек и профиля.
 */
@@ -50,12 +56,6 @@ const initialProfile = (name, description) => {
   profileDescriptionInput.value = description;
 };
 initialProfile(profileTitle.textContent, profileSubtitle.textContent);
-
-
-/** Включение валидации форм.
-*/
-new FormValidator(selectorConfig, editProfileForm).enableValidation();
-new FormValidator(selectorConfig, addCardForm).enableValidation();
 
 
 function handleKeydown(evt) {
