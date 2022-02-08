@@ -25,4 +25,12 @@ export const initialCards = [
   },
 ];
 
+// Селекторы элементов.
 export const cardListSelector = '.cards';
+export const userNameSelector = '.profile__title';
+export const userDescriptionSelector = '.profile__subtitle';
+
+// Элементы.
+export const editProfileForm = document.forms.editProfile;
+export const profileNameInput = editProfileForm.name;
+export const profileDescriptionInput = editProfileForm.description;

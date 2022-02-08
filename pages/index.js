@@ -1,8 +1,14 @@
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
 import {
   cardListSelector,
+  editProfileForm,
+  profileNameInput,
+  profileDescriptionInput,
+  userNameSelector,
+  userDescriptionSelector,
   initialCards,
 } from '../utils/constants.js';
 
@@ -21,14 +27,8 @@ const selectorConfig = {
 
 const popups = document.querySelectorAll('.popup');
 
-const profileTitle = document.querySelector('.profile__title');
-const profileSubtitle = document.querySelector('.profile__subtitle');
-
 const editProfileButton = document.querySelector('.profile__edit-button');
 const editProfilePopup = document.querySelector('.popup_type_profile');
-const editProfileForm = document.forms.editProfile;
-const profileNameInput = editProfileForm.name;
-const profileDescriptionInput = editProfileForm.description;
 
 const addCardButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_type_card');
@@ -56,16 +56,13 @@ const cardList = new Section({
     cardList.addItem(card);
   }
 }, cardListSelector);
-
 cardList.renderItems();
+
 
 /** Инициализация профиля.
 */
-const initialProfile = (name, description) => {
-  profileNameInput.value = name;
-  profileDescriptionInput.value = description;
-};
-initialProfile(profileTitle.textContent, profileSubtitle.textContent);
+const userInfo = new UserInfo(userNameSelector, userDescriptionSelector);
+userInfo.setUserInfo();
 
 
 function handleKeydown(evt) {
@@ -87,8 +84,7 @@ function closePopup(popup) {
 function editProfileFormSubmit(evt) {
   evt.preventDefault();
 
-  profileTitle.textContent = profileNameInput.value;
-  profileSubtitle.textContent = profileDescriptionInput.value;
+  userInfo.setUserInfo(profileNameInput.value, profileDescriptionInput.value);
 
   closePopup(editProfilePopup);
 }
