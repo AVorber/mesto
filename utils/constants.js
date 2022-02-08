@@ -3,7 +3,7 @@ export const initialCards = [
     name: 'Камчатка',
     link: './images/kamchatka.jpg'
   },
-    {
+  {
     name: 'Дивноморск',
     link: './images/divnomorsk.jpg'
   },
@@ -24,3 +24,5 @@ export const initialCards = [
     link: './images/olhon.jpg'
   },
 ];
+
+export const cardListSelector = '.cards';

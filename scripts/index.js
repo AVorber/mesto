@@ -1,6 +1,10 @@
 import { Card } from './Card.js';
-import { initialCards } from './data.js';
+import { Section } from '../components/Section.js';
 import { FormValidator } from './FormValidator.js';
+import {
+  cardListSelector,
+  initialCards,
+} from '../utils/constants.js';
 
 export { selectorConfig, openImagePopup };
 
@@ -36,8 +40,6 @@ const imagePopup = document.querySelector('.popup_type_image');
 const popupImage = imagePopup.querySelector('.popup__image');
 const popupImageTitle = imagePopup.querySelector('.popup__image-title');
 
-const cards = document.querySelector('.cards');
-
 const editProfileFormValidator = new FormValidator(selectorConfig, editProfileForm);
 editProfileFormValidator.enableValidation();
 
@@ -45,12 +47,20 @@ const addCardFormValidator = new FormValidator(selectorConfig, addCardForm);
 addCardFormValidator.enableValidation();
 
 
-/** Инициализация блока карточек и профиля.
+/** Инициализация блока карточек.
 */
-initialCards.forEach(
-  element => cards.append(createCard(element.name, element.link))
-);
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = createCard(item.name, item.link);
+    cardList.addItem(card);
+  }
+}, cardListSelector);
 
+cardList.renderItems();
+
+/** Инициализация профиля.
+*/
 const initialProfile = (name, description) => {
   profileNameInput.value = name;
   profileDescriptionInput.value = description;
@@ -104,7 +114,7 @@ function addCardFormSubmit(evt) {
   const cardImageLink = cardImageLinkInput.value;
   const card = createCard(cardName, cardImageLink);
 
-  cards.prepend(card);
+  cardList.addItemFirst(card);
 
   closePopup(addCardPopup);
 }
