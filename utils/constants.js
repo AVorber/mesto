@@ -29,8 +29,10 @@ export const initialCards = [
 export const cardListSelector = '.cards';
 export const userNameSelector = '.profile__title';
 export const userDescriptionSelector = '.profile__subtitle';
+export const profilePopupSelector = '.popup_type_profile';
+export const imagePopupSelector = '.popup_type_image';
 
-// Элементы.
+// Элементы форм.
 export const editProfileForm = document.forms.editProfile;
 export const profileNameInput = editProfileForm.name;
 export const profileDescriptionInput = editProfileForm.description;
