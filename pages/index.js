@@ -1,6 +1,6 @@
-import { Card } from './Card.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-import { FormValidator } from './FormValidator.js';
 import {
   cardListSelector,
   initialCards,
