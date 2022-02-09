@@ -26,6 +26,7 @@ export const initialCards = [
 ];
 
 // Селекторы элементов.
+export const cardTemplate = '.card-template';
 export const cardListSelector = '.cards';
 export const userNameSelector = '.profile__title';
 export const userDescriptionSelector = '.profile__subtitle';
@@ -40,3 +41,13 @@ export const addCardForm = document.forms.addCard;
 export const editProfileForm = document.forms.editProfile;
 export const profileNameInput = editProfileForm.name;
 export const profileDescriptionInput = editProfileForm.description;
+
+// Набор селекторов для валидации полей
+export const selectorConfig = {
+  formFieldsetSelector: '.popup__input-container',
+  inputSelector: '.popup__field',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_inactive',
+  inputErrorClass: 'popup__field_type_error',
+  errorClass: 'popup__field-error_active'
+};

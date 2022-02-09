@@ -6,6 +6,7 @@ import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import {
   initialCards,
+  cardTemplate,
   cardListSelector,
   userNameSelector,
   userDescriptionSelector,
@@ -18,20 +19,9 @@ import {
   editProfileForm,
   profileNameInput,
   profileDescriptionInput,
+  selectorConfig,
 } from '../utils/constants.js';
 
-export { selectorConfig };
-
-
-const selectorConfig = {
-  cardTemplate: '.card-template',
-  formFieldsetSelector: '.popup__input-container',
-  inputSelector: '.popup__field',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_inactive',
-  inputErrorClass: 'popup__field_type_error',
-  errorClass: 'popup__field-error_active'
-};
 
 const editProfileFormValidator = new FormValidator(selectorConfig, editProfileForm);
 editProfileFormValidator.enableValidation();
@@ -91,7 +81,7 @@ function createCard(name, link) {
   const card = new Card(
     name,
     link,
-    selectorConfig.cardTemplate,
+    cardTemplate,
     () => imagePopup.open(name, link),
     );
   const cardElement = card.getCard();
