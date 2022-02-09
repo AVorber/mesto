@@ -6,20 +6,19 @@
   <meta name="description" content="Mesto - сервис о красивых и интересных местах.">
   <meta name="keywords" content="путешествия, природа, интересные места">
   <meta name="author" content="Ребров Александр">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Mesto - сервис о красивых и интересных местах.</title>
 </head>
 <body class="page">
   <header class="header">
     <a href="#" class="header__logo-link">
-      <img src="images/header-logo.svg" alt="Место" class="header__logo">
+      <img src="<%=require('./images/header-logo.svg')%>" alt="Место" class="header__logo">
     </a>
     <hr class="header__line">
   </header>
 
   <main class="content">
     <section class="profile" aria-label="Профиль пользователя">
-      <img src="./images/kusto.jpg" alt="Аватар пользователя" class="profile__avatar">
+      <img src="<%=require('./images/kusto.jpg')%>" alt="Аватар пользователя" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__title"></h1>
         <p class="profile__subtitle"></p>
@@ -122,7 +121,5 @@
       <button type="button" class="card__delete-button"></button>
     </article>
   </template>
-
-  <script type="module" src="./pages/index.js"></script>
 </body>
 </html>

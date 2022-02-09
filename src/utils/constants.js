@@ -1,27 +1,35 @@
+// вебпак добавит в переменные правильные пути
+const kamchatka = new URL('../images/kamchatka.jpg', import.meta.url);
+const divnomorsk = new URL('../images/divnomorsk.jpg', import.meta.url);
+const kabardinoBalkariya = new URL('../images/kabardino-balkariya.jpg', import.meta.url);
+const nikolaLenivetc = new URL('../images/nikola-lenivetc.jpg', import.meta.url);
+const peterhof = new URL('../images/peterhof.jpg', import.meta.url);
+const olhon = new URL('../images/olhon.jpg', import.meta.url);
+
 export const initialCards = [
   {
     name: 'Камчатка',
-    link: './images/kamchatka.jpg'
+    link: kamchatka
   },
   {
     name: 'Дивноморск',
-    link: './images/divnomorsk.jpg'
+    link: divnomorsk
   },
   {
     name: 'Кабардино-Балкария',
-    link: './images/kabardino-balkariya.jpg'
+    link: kabardinoBalkariya
   },
   {
     name: 'Никола-Ленивец',
-    link: './images/nikola-lenivetc.jpg'
+    link: nikolaLenivetc
   },
   {
     name: 'Петергоф',
-    link: './images/peterhof.jpg'
+    link: peterhof
   },
   {
     name: 'Ольхон',
-    link: './images/olhon.jpg'
+    link: olhon
   },
 ];
 
