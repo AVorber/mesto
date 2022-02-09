@@ -1,10 +1,9 @@
-import { openImagePopup } from '../pages/index.js';
-
 export class Card {
-  constructor(cardSelector, name, link) {
-    this._cardSelector = cardSelector;
+  constructor(name, link, cardSelector, handleCardClick) {
     this._name = name;
     this._link = link;
+    this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -22,7 +21,7 @@ export class Card {
     this._cardLikeButton.addEventListener('click', evt =>
         evt.target.classList.toggle('card__favorite-button_active')
       );
-    this._cardImage.addEventListener('click', evt => openImagePopup(this._name, this._link));
+    this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
 
   getCard() {
