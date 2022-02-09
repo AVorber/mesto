@@ -38,7 +38,5 @@ export const addCardButton = document.querySelector('.profile__add-button');
 export const editProfileButton = document.querySelector('.profile__edit-button');
 export const addCardForm = document.forms.addCard;
 export const editProfileForm = document.forms.editProfile;
-export const cardNameInput = addCardForm.name;
-export const cardImageLinkInput = addCardForm.imageLink;
 export const profileNameInput = editProfileForm.name;
 export const profileDescriptionInput = editProfileForm.description;

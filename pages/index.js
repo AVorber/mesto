@@ -16,8 +16,6 @@ import {
   editProfileButton,
   addCardForm,
   editProfileForm,
-  cardNameInput,
-  cardImageLinkInput,
   profileNameInput,
   profileDescriptionInput,
 } from '../utils/constants.js';
@@ -64,9 +62,9 @@ userInfo.setUserInfo();
 */
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
-  evt => {
+  (evt, { name, description }) => {
     evt.preventDefault();
-    userInfo.setUserInfo(profileNameInput.value, profileDescriptionInput.value);
+    userInfo.setUserInfo(name, description);
     profilePopup.close();
   },
 );
@@ -74,11 +72,9 @@ profilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm(
   addCardPopupSelector,
-  evt => {
+  (evt, { name, imageLink }) => {
     evt.preventDefault();
-    const cardName = cardNameInput.value;
-    const cardImageLink = cardImageLinkInput.value;
-    const card = createCard(cardName, cardImageLink);
+    const card = createCard(name, imageLink);
     cardList.addItemFirst(card);
     addCardPopup.close();
   },
