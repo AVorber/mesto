@@ -29,11 +29,12 @@ export class Card {
     this._cardDeleteButton = this._element.querySelector('.card__delete-button');
     this._cardLikeButton = this._element.querySelector('.card__favorite-button');
     this._cardImage = this._element.querySelector('.card__image');
+    this._cardTitle = this._element.querySelector('.card__title');
     this._setEventListeners();
 
-    this._element.querySelector('.card__title').textContent = this._name;
-    this._element.querySelector('.card__image').alt = this._name;
-    this._element.querySelector('.card__image').src = this._link;
+    this._cardTitle.textContent = this._name;
+    this._cardImage.alt = this._name;
+    this._cardImage.src = this._link;
 
     return this._element;
   }
