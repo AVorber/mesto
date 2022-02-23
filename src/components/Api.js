@@ -4,18 +4,20 @@ class Api {
     this._headers = options.headers;
   }
 
+  _validateResponse(response) {
+    if (response.ok) {
+      return response.json()
+    }
+    return Promise.reject(`Ошибка: ${response.status}`)
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`,
       {
         method: 'GET',
         headers: this._headers,
       })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          }
-          return Promise.reject(`Ошибка: ${response.status}`)
-        })
+        .then(response => this._validateResponse(response))
   }
 
   getUserInfo() {
@@ -24,12 +26,20 @@ class Api {
         method: 'GET',
         headers: this._headers,
       })
-        .then(response => {
-          if (response.ok) {
-            return response.json()
-          }
-          return Promise.reject(`Ошибка: ${response.status}`)
+        .then(response => this._validateResponse(response))
+  }
+
+  editUserInfo({ name, about }) {
+    return fetch(`${this._baseUrl}/users/me`,
+      {
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          about: about,
         })
+      })
+        .then(response => this._validateResponse(response))
   }
 }
 

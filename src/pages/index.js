@@ -63,7 +63,9 @@ const profilePopup = new PopupWithForm(
   profilePopupSelector,
   (evt, data) => {
     evt.preventDefault();
-    userInfo.setUserInfo(data);
+    api.editUserInfo(data)
+      .then(response => userInfo.setUserInfo(response))
+      .catch(err => alert(err));
     profilePopup.close();
   },
 );
