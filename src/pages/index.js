@@ -1,4 +1,5 @@
 import './index.css';
+import { api } from '../components/Api.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
@@ -9,6 +10,7 @@ import {
   initialCards,
   cardTemplate,
   cardListSelector,
+  userAvatarSelector,
   userNameSelector,
   userDescriptionSelector,
   profilePopupSelector,
@@ -45,17 +47,19 @@ cardList.renderItems();
 
 /** Инициализация профиля.
 */
-const userInfo = new UserInfo(userNameSelector, userDescriptionSelector);
-userInfo.setUserInfo();
+const userInfo = new UserInfo(userAvatarSelector, userNameSelector, userDescriptionSelector);
+Promise.resolve(api.getUserInfo())
+  .then(data => userInfo.setUserInfo(data))
+  .catch(err => alert(err));
 
 
 /** Инициализация попапов.
 */
 const profilePopup = new PopupWithForm(
   profilePopupSelector,
-  (evt, { name, description }) => {
+  (evt, data) => {
     evt.preventDefault();
-    userInfo.setUserInfo(name, description);
+    userInfo.setUserInfo(data);
     profilePopup.close();
   },
 );
@@ -90,9 +94,9 @@ function createCard(name, link) {
 }
 
 editProfileButton.addEventListener('click', () => {
-  const { name, description } = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   profileNameInput.value = name;
-  profileDescriptionInput.value = description;
+  profileDescriptionInput.value = about;
   editProfileFormValidator.resetValidation();
   profilePopup.open();
 });

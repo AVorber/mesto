@@ -36,6 +36,7 @@ export const initialCards = [
 // Селекторы элементов.
 export const cardTemplate = '.card-template';
 export const cardListSelector = '.cards';
+export const userAvatarSelector = '.profile__avatar';
 export const userNameSelector = '.profile__title';
 export const userDescriptionSelector = '.profile__subtitle';
 export const profilePopupSelector = '.popup_type_profile';
@@ -48,7 +49,7 @@ export const editProfileButton = document.querySelector('.profile__edit-button')
 export const addCardForm = document.forms.addCard;
 export const editProfileForm = document.forms.editProfile;
 export const profileNameInput = editProfileForm.name;
-export const profileDescriptionInput = editProfileForm.description;
+export const profileDescriptionInput = editProfileForm.about;
 
 // Набор селекторов для валидации полей
 export const selectorConfig = {
