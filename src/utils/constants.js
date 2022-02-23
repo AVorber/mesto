@@ -6,7 +6,7 @@ const nikolaLenivetc = new URL('../images/nikola-lenivetc.jpg', import.meta.url)
 const peterhof = new URL('../images/peterhof.jpg', import.meta.url);
 const olhon = new URL('../images/olhon.jpg', import.meta.url);
 
-export const initialCards = [
+const initialCards = [
   {
     name: 'Камчатка',
     link: kamchatka

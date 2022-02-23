@@ -4,6 +4,20 @@ class Api {
     this._headers = options.headers;
   }
 
+  getInitialCards() {
+    return fetch(`${this._baseUrl}/cards`,
+      {
+        method: 'GET',
+        headers: this._headers,
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json()
+          }
+          return Promise.reject(`Ошибка: ${response.status}`)
+        })
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`,
       {

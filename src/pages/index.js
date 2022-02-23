@@ -7,7 +7,6 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
 import { UserInfo } from '../components/UserInfo.js';
 import {
-  initialCards,
   cardTemplate,
   cardListSelector,
   userAvatarSelector,
@@ -35,14 +34,19 @@ addCardFormValidator.enableValidation();
 
 /** Инициализация блока карточек.
 */
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = createCard(item.name, item.link);
-    cardList.addItem(card);
-  }
-}, cardListSelector);
-cardList.renderItems();
+let cardList = {};
+Promise.resolve(api.getInitialCards())
+  .then(data => {
+    cardList = new Section({
+      items: data,
+      renderer: (item) => {
+        const card = createCard(item.name, item.link);
+        cardList.addItem(card);
+      }
+    }, cardListSelector);
+    cardList.renderItems();
+  })
+  .catch(err => alert(err));
 
 
 /** Инициализация профиля.
