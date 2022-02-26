@@ -75,8 +75,12 @@ const addCardPopup = new PopupWithForm(
   addCardPopupSelector,
   (evt, { name, imageLink }) => {
     evt.preventDefault();
-    const card = createCard(name, imageLink);
-    cardList.addItemFirst(card);
+    api.addCard(name, imageLink)
+      .then(() => {
+        const card = createCard(name, imageLink);
+        cardList.addItemFirst(card);
+      })
+      .catch(err => alert(err));
     addCardPopup.close();
   },
 );

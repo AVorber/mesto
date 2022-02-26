@@ -20,6 +20,19 @@ class Api {
         .then(response => this._validateResponse(response))
   }
 
+  addCard(name, link) {
+    return fetch(`${this._baseUrl}/cards`,
+      {
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: name,
+          link: link,
+        })
+      })
+        .then(response => this._validateResponse(response))
+  }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`,
       {
