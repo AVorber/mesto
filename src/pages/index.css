@@ -28,12 +28,12 @@
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__delete-button/card__delete-button.css);
-@import url(../blocks/card/__favorite-button/card__favorite-button.css);
-@import url(../blocks/card/__favorite-button/_active/card__favorite-button_active.css);
-@import url(../blocks/card/__favorite-counter/card__favorite-counter.css);
-@import url(../blocks/card/__favorite-wrapper/card__favorite-wrapper.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info/card__info.css);
+@import url(../blocks/card/__like-button/card__like-button.css);
+@import url(../blocks/card/__like-button/_active/card__like-button_active.css);
+@import url(../blocks/card/__like-counter/card__like-counter.css);
+@import url(../blocks/card/__like-wrapper/card__like-wrapper.css);
 @import url(../blocks/card/__title/card__title.css);
 
 /*footer*/

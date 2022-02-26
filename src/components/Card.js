@@ -20,7 +20,7 @@ export class Card {
   _setEventListeners() {
     this._cardDeleteButton.addEventListener('click', evt => evt.target.closest('.card').remove());
     this._cardLikeButton.addEventListener('click', evt =>
-        evt.target.classList.toggle('card__favorite-button_active')
+        evt.target.classList.toggle('card__like-button_active')
       );
     this._cardImage.addEventListener('click', () => this._handleCardClick(this._name, this._link));
   }
@@ -28,16 +28,16 @@ export class Card {
   getCard() {
     this._element = this._getTemplate();
     this._cardDeleteButton = this._element.querySelector('.card__delete-button');
-    this._cardLikeButton = this._element.querySelector('.card__favorite-button');
+    this._cardLikeButton = this._element.querySelector('.card__like-button');
     this._cardImage = this._element.querySelector('.card__image');
     this._cardTitle = this._element.querySelector('.card__title');
-    this._cardLikesCount = this._element.querySelector('.card__favorite-counter');
+    this._cardLikeCount = this._element.querySelector('.card__like-counter');
     this._setEventListeners();
 
     this._cardTitle.textContent = this._name;
     this._cardImage.alt = this._name;
     this._cardImage.src = this._link;
-    this._cardLikesCount.textContent = this._likes;
+    this._cardLikeCount.textContent = this._likes;
 
     return this._element;
   }
