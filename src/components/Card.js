@@ -1,12 +1,14 @@
 export class Card {
-  constructor({ _id, name, link, likes }, cardSelector, handleCardClick, handleCardDelete) {
+  constructor({ _id, name, link, likes, owner }, cardSelector, handleCardClick, handleCardDelete, userId) {
     this._cardId = _id;
     this._name = name;
     this._link = link;
     this._likes = likes.length;
+    this._cardOwnerId = owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handleCardDelete = handleCardDelete;
+    this._userId = userId;
   }
 
   _getTemplate() {
@@ -42,6 +44,10 @@ export class Card {
     this._cardImage.alt = this._name;
     this._cardImage.src = this._link;
     this._cardLikeCount.textContent = this._likes;
+
+    if (this._userId !== this._cardOwnerId) {
+      this._cardDeleteButton.remove();
+    }
 
     return this._element;
   }

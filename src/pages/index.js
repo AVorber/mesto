@@ -42,7 +42,7 @@ Promise.resolve(api.getInitialCards())
     cardList = new Section({
       items: data,
       renderer: (item) => {
-        const card = createCard(item);
+        const card = createCard(item, userInfo.getUserInfo());
         cardList.addItem(card);
       }
     }, cardListSelector);
@@ -78,8 +78,8 @@ const addCardPopup = new PopupWithForm(
   (evt, { name, imageLink }) => {
     evt.preventDefault();
     api.addCard(name, imageLink)
-      .then(response => {
-        const card = createCard(response);
+      .then(item => {
+        const card = createCard(item, userInfo.getUserInfo());
         cardList.addItemFirst(card);
       })
       .catch(err => alert(err));
@@ -105,12 +105,13 @@ confirmPopup.setEventListeners();
 
 /** Функции и обработчики событий.
 */
-function createCard(data) {
+function createCard(data, userInfo) {
   const card = new Card(
     data,
     cardTemplate,
     () => imagePopup.open(data.name, data.link),
     (cardId, item) => confirmPopup.open({ cardId, item }),
+    userInfo._id,
     );
   const cardElement = card.getCard();
   return cardElement;

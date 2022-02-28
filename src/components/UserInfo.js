@@ -7,12 +7,14 @@ export class UserInfo {
 
   getUserInfo() {
     return {
+      _id: this._userId,
       name: this._name.textContent,
       about: this._about.textContent,
     }
   }
 
-  setUserInfo({ avatar='', name='Жак-Ив Кусто', about='Исследователь океана' }) {
+  setUserInfo({ _id, avatar='', name='Жак-Ив Кусто', about='Исследователь океана' }) {
+    this._userId = _id;
     if (avatar) {
       this._avatar.src = avatar;
     }
