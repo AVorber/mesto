@@ -2,6 +2,7 @@ import './index.css';
 import { api } from '../components/Api.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
+import { PopupWithConfirm } from '../components/PopupWithConfirm.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { Section } from '../components/Section.js';
@@ -15,6 +16,7 @@ import {
   profilePopupSelector,
   addCardPopupSelector,
   imagePopupSelector,
+  confirmPopupSelector,
   addCardButton,
   editProfileButton,
   addCardForm,
@@ -89,6 +91,17 @@ addCardPopup.setEventListeners();
 const imagePopup = new PopupWithImage(imagePopupSelector);
 imagePopup.setEventListeners();
 
+const confirmPopup = new PopupWithConfirm(
+  confirmPopupSelector,
+  ({ cardId, item }) => {
+    api.deleteCard(cardId)
+      .then(() => item.remove())
+      .catch(err => alert(err));
+    confirmPopup.close();
+  },
+);
+confirmPopup.setEventListeners();
+
 
 /** Функции и обработчики событий.
 */
@@ -97,6 +110,7 @@ function createCard(data) {
     data,
     cardTemplate,
     () => imagePopup.open(data.name, data.link),
+    (cardId, item) => confirmPopup.open({ cardId, item }),
     );
   const cardElement = card.getCard();
   return cardElement;

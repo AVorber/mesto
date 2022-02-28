@@ -33,6 +33,15 @@ class Api {
         .then(response => this._validateResponse(response))
   }
 
+    deleteCard(cardId) {
+      return fetch(`${this._baseUrl}/cards/${cardId}`,
+        {
+          method: 'DELETE',
+          headers: this._headers,
+        })
+          .then(response => this._validateResponse(response))
+    }
+
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`,
       {

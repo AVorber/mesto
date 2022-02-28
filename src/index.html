@@ -111,6 +111,16 @@
     </div>
   </div>
 
+  <div class="popup popup_type_confirm">
+    <div class="popup__container">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <form name="deleteCard"  class="popup__form" novalidate>
+        <button type="submit" class="popup__save-button">Да</button>
+      </form>
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
+
   <template class="card-template">
     <article class="card">
       <img src="#" alt="" class="card__image">
@@ -118,7 +128,7 @@
         <h3 class="card__title"></h3>
         <div class="card__like-wrapper">
           <button type="button" class="card__like-button"></button>
-          <span class="card__like-counter">12</span>
+          <span class="card__like-counter"></span>
         </div>
       </div>
       <button type="button" class="card__delete-button"></button>

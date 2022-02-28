@@ -42,6 +42,7 @@ export const userDescriptionSelector = '.profile__subtitle';
 export const profilePopupSelector = '.popup_type_profile';
 export const addCardPopupSelector = '.popup_type_card';
 export const imagePopupSelector = '.popup_type_image';
+export const confirmPopupSelector = '.popup_type_confirm';
 
 // Элементы форм.
 export const addCardButton = document.querySelector('.profile__add-button');
