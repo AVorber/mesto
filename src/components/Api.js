@@ -63,6 +63,24 @@ class Api {
       })
         .then(response => this._validateResponse(response))
   }
+
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`,
+      {
+        method: 'PUT',
+        headers: this._headers,
+      })
+        .then(response => this._validateResponse(response))
+  }
+
+  deleteLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`,
+      {
+        method: 'DELETE',
+        headers: this._headers,
+      })
+        .then(response => this._validateResponse(response))
+  }
 }
 
 export const api = new Api({

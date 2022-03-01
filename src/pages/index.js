@@ -110,6 +110,21 @@ function createCard(data, userInfo) {
     data,
     cardTemplate,
     () => imagePopup.open(data.name, data.link),
+    cardId => {
+      if (card.isLiked()) {
+				api.deleteLike(cardId)
+					.then(data => {
+						card.setLikeCount(data.likes)
+					})
+					.catch(err => alert(err));
+			} else {
+				api.addLike(cardId)
+					.then(data => {
+						card.setLikeCount(data.likes)
+					})
+					.catch(err => alert(err));
+			}
+		},
     (cardId, item) => confirmPopup.open({ cardId, item }),
     userInfo._id,
     );
