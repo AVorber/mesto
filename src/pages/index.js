@@ -14,15 +14,19 @@ import {
   userNameSelector,
   userDescriptionSelector,
   profilePopupSelector,
+  avatarPopupSelector,
   addCardPopupSelector,
   imagePopupSelector,
   confirmPopupSelector,
   addCardButton,
   editProfileButton,
+  editAvatarButton,
   addCardForm,
   editProfileForm,
   profileNameInput,
   profileDescriptionInput,
+  editAvatarForm,
+  avatarLinkInput,
   selectorConfig,
 } from '../utils/constants.js';
 
@@ -30,8 +34,19 @@ import {
 const editProfileFormValidator = new FormValidator(selectorConfig, editProfileForm);
 editProfileFormValidator.enableValidation();
 
+const editAvatarFormValidator = new FormValidator(selectorConfig, editAvatarForm);
+editAvatarFormValidator.enableValidation();
+
 const addCardFormValidator = new FormValidator(selectorConfig, addCardForm);
 addCardFormValidator.enableValidation();
+
+
+/** Инициализация профиля.
+*/
+const userInfo = new UserInfo(userAvatarSelector, userNameSelector, userDescriptionSelector);
+Promise.resolve(api.getUserInfo())
+  .then(data => userInfo.setUserInfo(data))
+  .catch(err => alert(err));
 
 
 /** Инициализация блока карточек.
@@ -51,14 +66,6 @@ Promise.resolve(api.getInitialCards())
   .catch(err => alert(err));
 
 
-/** Инициализация профиля.
-*/
-const userInfo = new UserInfo(userAvatarSelector, userNameSelector, userDescriptionSelector);
-Promise.resolve(api.getUserInfo())
-  .then(data => userInfo.setUserInfo(data))
-  .catch(err => alert(err));
-
-
 /** Инициализация попапов.
 */
 const profilePopup = new PopupWithForm(
@@ -72,6 +79,18 @@ const profilePopup = new PopupWithForm(
   },
 );
 profilePopup.setEventListeners();
+
+const avatarPopup = new PopupWithForm(
+  avatarPopupSelector,
+  (evt, data) => {
+    evt.preventDefault();
+    api.editUserAvatar(data)
+      .then(response => userInfo.setUserInfo(response))
+      .catch(err => alert(err));
+    avatarPopup.close();
+  },
+);
+avatarPopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm(
   addCardPopupSelector,
@@ -138,6 +157,13 @@ editProfileButton.addEventListener('click', () => {
   profileDescriptionInput.value = about;
   editProfileFormValidator.resetValidation();
   profilePopup.open();
+});
+
+editAvatarButton.addEventListener('click', () => {
+  const { avatar } = userInfo.getUserInfo();
+  avatarLinkInput.value = avatar;
+  editAvatarFormValidator.resetValidation();
+  avatarPopup.open();
 });
 
 addCardButton.addEventListener('click', () => {

@@ -40,6 +40,7 @@ export const userAvatarSelector = '.profile__avatar';
 export const userNameSelector = '.profile__title';
 export const userDescriptionSelector = '.profile__subtitle';
 export const profilePopupSelector = '.popup_type_profile';
+export const avatarPopupSelector = '.popup_type_avatar';
 export const addCardPopupSelector = '.popup_type_card';
 export const imagePopupSelector = '.popup_type_image';
 export const confirmPopupSelector = '.popup_type_confirm';
@@ -47,10 +48,13 @@ export const confirmPopupSelector = '.popup_type_confirm';
 // Элементы форм.
 export const addCardButton = document.querySelector('.profile__add-button');
 export const editProfileButton = document.querySelector('.profile__edit-button');
+export const editAvatarButton = document.querySelector('.profile__avatar-container');
 export const addCardForm = document.forms.addCard;
 export const editProfileForm = document.forms.editProfile;
 export const profileNameInput = editProfileForm.name;
 export const profileDescriptionInput = editProfileForm.about;
+export const editAvatarForm = document.forms.editAvatar;
+export const avatarLinkInput = editAvatarForm.avatarLink;
 
 // Набор селекторов для валидации полей
 export const selectorConfig = {
