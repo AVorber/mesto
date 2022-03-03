@@ -41,21 +41,16 @@ const addCardFormValidator = new FormValidator(selectorConfig, addCardForm);
 addCardFormValidator.enableValidation();
 
 
-/** Инициализация профиля.
+/** Инициализация исходных данных.
 */
 const userInfo = new UserInfo(userAvatarSelector, userNameSelector, userDescriptionSelector);
-Promise.resolve(api.getUserInfo())
-  .then(data => userInfo.setUserInfo(data))
-  .catch(err => alert(err));
-
-
-/** Инициализация блока карточек.
-*/
 let cardList = {};
-Promise.resolve(api.getInitialCards())
-  .then(data => {
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    userInfo.setUserInfo(userData);
     cardList = new Section({
-      items: data,
+      items: initialCards,
       renderer: (item) => {
         const card = createCard(item, userInfo.getUserInfo());
         cardList.addItem(card);
