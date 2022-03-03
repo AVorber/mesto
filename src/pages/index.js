@@ -117,8 +117,8 @@ const confirmPopup = new PopupWithConfirm(
   ({ cardId, item }) => {
     api.deleteCard(cardId)
       .then(() => item.remove())
+      .then(() => confirmPopup.close())
       .catch(err => alert(err));
-    confirmPopup.close();
   },
 );
 confirmPopup.setEventListeners();
