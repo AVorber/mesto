@@ -49,6 +49,7 @@ export const confirmPopupSelector = '.popup_type_confirm';
 export const addCardButton = document.querySelector('.profile__add-button');
 export const editProfileButton = document.querySelector('.profile__edit-button');
 export const editAvatarButton = document.querySelector('.profile__avatar-container');
+const editProfileForm = document.forms.editProfile;
 export const profileNameInput = editProfileForm.name;
 export const profileDescriptionInput = editProfileForm.about;
 
