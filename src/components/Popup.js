@@ -2,7 +2,6 @@ export class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._submitButton = this._popup.querySelector('.popup__save-button');
   }
 
   _handleEscClose(evt) {
@@ -12,7 +11,7 @@ export class Popup {
   }
 
   setEventListeners() {
-    this._popup.addEventListener('click', evt => {
+    this._popup.addEventListener('mousedown', evt => {
       if (evt.target.classList.contains('popup_opened')) {
         this.close()
       }
@@ -20,14 +19,6 @@ export class Popup {
         this.close()
       }
     })
-  }
-
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this._submitButton.textContent = 'Сохранение...';
-    } else {
-      this._submitButton.textContent = 'Сохранить';
-    }
   }
 
   open() {
