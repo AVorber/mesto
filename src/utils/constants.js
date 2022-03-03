@@ -49,15 +49,12 @@ export const confirmPopupSelector = '.popup_type_confirm';
 export const addCardButton = document.querySelector('.profile__add-button');
 export const editProfileButton = document.querySelector('.profile__edit-button');
 export const editAvatarButton = document.querySelector('.profile__avatar-container');
-export const addCardForm = document.forms.addCard;
-export const editProfileForm = document.forms.editProfile;
 export const profileNameInput = editProfileForm.name;
 export const profileDescriptionInput = editProfileForm.about;
-export const editAvatarForm = document.forms.editAvatar;
-export const avatarLinkInput = editAvatarForm.avatarLink;
 
 // Набор селекторов для валидации полей
 export const selectorConfig = {
+  formSelector: '.popup__form',
   formFieldsetSelector: '.popup__input-container',
   inputSelector: '.popup__field',
   submitButtonSelector: '.popup__save-button',

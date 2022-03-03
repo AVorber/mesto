@@ -21,24 +21,25 @@ import {
   addCardButton,
   editProfileButton,
   editAvatarButton,
-  addCardForm,
-  editProfileForm,
   profileNameInput,
   profileDescriptionInput,
-  editAvatarForm,
-  avatarLinkInput,
   selectorConfig,
 } from '../utils/constants.js';
 
 
-const editProfileFormValidator = new FormValidator(selectorConfig, editProfileForm);
-editProfileFormValidator.enableValidation();
-
-const editAvatarFormValidator = new FormValidator(selectorConfig, editAvatarForm);
-editAvatarFormValidator.enableValidation();
-
-const addCardFormValidator = new FormValidator(selectorConfig, addCardForm);
-addCardFormValidator.enableValidation();
+/** Включение валидации.
+*/
+const formValidators = {};
+const enableValidation = config => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach(formElement => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+enableValidation(selectorConfig);
 
 
 /** Инициализация исходных данных.
@@ -156,18 +157,16 @@ editProfileButton.addEventListener('click', () => {
   const { name, about } = userInfo.getUserInfo();
   profileNameInput.value = name;
   profileDescriptionInput.value = about;
-  editProfileFormValidator.resetValidation();
+  formValidators.editProfile.resetValidation();
   profilePopup.open();
 });
 
 editAvatarButton.addEventListener('click', () => {
-  const { avatar } = userInfo.getUserInfo();
-  avatarLinkInput.value = avatar;
-  editAvatarFormValidator.resetValidation();
+  formValidators.editAvatar.resetValidation();
   avatarPopup.open();
 });
 
 addCardButton.addEventListener('click', () => {
-  addCardFormValidator.resetValidation();
+  formValidators.addCard.resetValidation();
   addCardPopup.open();
 });
