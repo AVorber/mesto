@@ -70,11 +70,9 @@ const profilePopup = new PopupWithForm(
     profilePopup.renderLoading(true);
     api.editUserInfo(data)
       .then(response => userInfo.setUserInfo(response))
+      .then(() => profilePopup.close())
       .catch(err => alert(err))
-      .finally(() => {
-        profilePopup.renderLoading(false);
-        profilePopup.close();
-      });
+      .finally(() => profilePopup.renderLoading(false));
   },
 );
 profilePopup.setEventListeners();
@@ -86,11 +84,9 @@ const avatarPopup = new PopupWithForm(
     avatarPopup.renderLoading(true);
     api.editUserAvatar(data)
       .then(response => userInfo.setUserInfo(response))
+      .then(() => avatarPopup.close())
       .catch(err => alert(err))
-      .finally(() => {
-        avatarPopup.renderLoading(false);
-        avatarPopup.close();
-      });
+      .finally(() => avatarPopup.renderLoading(false));
   },
 );
 avatarPopup.setEventListeners();
@@ -105,11 +101,9 @@ const addCardPopup = new PopupWithForm(
         const card = createCard(item, userInfo.getUserInfo());
         cardList.addItemFirst(card);
       })
+      .then(() => addCardPopup.close())
       .catch(err => alert(err))
-      .finally(() => {
-        addCardPopup.renderLoading(false);
-        addCardPopup.close();
-      });
+      .finally(() => addCardPopup.renderLoading(false));
   },
 );
 addCardPopup.setEventListeners();
